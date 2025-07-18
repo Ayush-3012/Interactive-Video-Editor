@@ -14,8 +14,8 @@ const initialState: IntroOutroState = {
   outro: null,
   introUrl: "",
   outroUrl: "",
-  introDuration: 3,
-  outroDuration: 3,
+  introDuration: 0,
+  outroDuration: 0,
 };
 
 const introOutroSlice = createSlice({

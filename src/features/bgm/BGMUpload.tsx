@@ -11,11 +11,7 @@ const BGMUpload = () => {
   };
 
   return (
-    <div className="text-center mt-8">
-      <label htmlFor="bgm-upload" className="block mb-2 font-medium text-lg">
-        Choose Audio File
-      </label>
-
+    <div className="text-center">
       <label
         htmlFor="bgm-upload"
         className="inline-block  hover:bg-cyan-900 hover:text-slate-200 hover:scale-x-110 duration-150 transition-all shadow-[1px_1px_10px] shadow-cyan-400 text-slate-900 px-5 py-2 rounded cursor-pointer"

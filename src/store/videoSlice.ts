@@ -3,11 +3,13 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 interface videoState {
   file: File | null;
   url: string;
+  duration: number;
 }
 
 const initialState: videoState = {
   file: null,
   url: "",
+  duration: 0,
 };
 
 const videoSlice = createSlice({
@@ -18,12 +20,11 @@ const videoSlice = createSlice({
       state.file = action.payload;
       state.url = URL.createObjectURL(action.payload);
     },
-    clearVideo(state) {
-      state.file = null;
-      state.url = "";
+    setVideoDuration: (state, action: PayloadAction<number>) => {
+      state.duration = action.payload;
     },
   },
 });
 
-export const { setVideoFile, clearVideo } = videoSlice.actions;
+export const { setVideoFile, setVideoDuration } = videoSlice.actions;
 export default videoSlice.reducer;

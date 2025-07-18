@@ -1,12 +1,14 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store/store";
 import { motion } from "framer-motion";
 import { FaPlay } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 const PreviewPlayer = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const [showPreviewBox, setShowPreviewBox] = useState(false);
 
   const { intro, outro, introUrl, outroUrl, introDuration, outroDuration } =
     useSelector((state: RootState) => state.introOutro);
@@ -14,6 +16,11 @@ const PreviewPlayer = () => {
   const bgmUrl = useSelector((state: RootState) => state.bgm.url);
 
   const handlePreview = async () => {
+    setShowPreviewBox(true);
+    toast.success(
+      "Click Again to show the preview, But make sure video is uploaded"
+    );
+
     const previewBox = document.getElementById("preview-box");
     if (!previewBox) return;
 
@@ -67,7 +74,8 @@ const PreviewPlayer = () => {
       mainVideo.controls = true;
       mainVideo.style.display = "block";
       mainVideo.style.width = "100%";
-      mainVideo.style.border = "2px solid #3b82f6"; // Tailwind blue-500
+      mainVideo.style.border = "2px solid #3b82f6";
+      mainVideo.play();
 
       previewBox.appendChild(mainVideo);
       mainVideo.currentTime = 0;
@@ -124,11 +132,11 @@ const PreviewPlayer = () => {
   };
 
   return (
-    <div className="mt-10 text-center">
+    <div className="text-center">
       <motion.button
         onClick={handlePreview}
         whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.90 }}
+        whileTap={{ scale: 0.9 }}
         className="inline-block shadow-[1px_1px_10px] hover:bg-blue-900 shadow-blue-400 text-slate-900 hover:scale-x-110 duration-150 transition-all hover:text-slate-200 px-4 py-2 rounded cursor-pointer"
       >
         <div className="flex items-center justify-center gap-2">
@@ -136,10 +144,15 @@ const PreviewPlayer = () => {
         </div>
       </motion.button>
 
-      <div
-        id="preview-box"
-        className="mt-6 w-full max-w-2xl mx-auto aspect-video bg-black rounded shadow overflow-hidden"
-      />
+      {showPreviewBox && (
+        <motion.div
+          id="preview-box"
+          className="mt-6 w-full max-w-2xl mx-auto aspect-video bg-black rounded shadow overflow-hidden"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1, type: "spring", bounce: 0.6 }}
+        />
+      )}
 
       {bgmUrl && <audio ref={audioRef} src={bgmUrl} />}
 

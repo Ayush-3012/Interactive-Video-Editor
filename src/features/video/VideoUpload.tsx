@@ -11,10 +11,7 @@ const VideoUpload = () => {
   };
 
   return (
-    <div className="text-center mt-8">
-      <label htmlFor="bgm-upload" className="block mb-2 font-medium text-lg">
-        Upload Main Video
-      </label>
+    <div className="text-center">
       <label htmlFor="video-upload">
         <label
           htmlFor="video-upload"
