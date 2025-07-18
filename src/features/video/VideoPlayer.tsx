@@ -8,16 +8,19 @@ const VideoPlayer = () => {
   if (!videoUrl) return null;
 
   return (
-    <>
-      <div className="p-4">
-        <video
-          src={videoUrl}
-          controls
-          className="w-full max-w-2xl mx-auto rounded shadow"
-        />
-        {bgmUrl && <audio src={bgmUrl} controls className="mt-4" />}
-      </div>
-    </>
+    <div className="p-4 text-center">
+      <h2 className="text-xl font-semibold mb-2">Main Video Preview</h2>
+
+      <video
+        src={videoUrl}
+        controls
+        className="w-full max-w-xl mx-auto rounded shadow-lg shadow-black"
+      />
+
+      {bgmUrl && (
+        <audio src={bgmUrl} controls className="mt-4 mx-auto block max-w-xl shadow-black" />
+      )}
+    </div>
   );
 };
 

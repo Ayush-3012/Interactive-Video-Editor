@@ -5,6 +5,8 @@ interface IntroOutroState {
   outro: File | null;
   introUrl: string;
   outroUrl: string;
+  introDuration: number;
+  outroDuration: number;
 }
 
 const initialState: IntroOutroState = {
@@ -12,6 +14,8 @@ const initialState: IntroOutroState = {
   outro: null,
   introUrl: "",
   outroUrl: "",
+  introDuration: 3,
+  outroDuration: 3,
 };
 
 const introOutroSlice = createSlice({
@@ -26,8 +30,15 @@ const introOutroSlice = createSlice({
       state.outro = action.payload;
       state.outroUrl = URL.createObjectURL(action.payload);
     },
+    setIntroDuration(state, action: PayloadAction<number>) {
+      state.introDuration = action.payload;
+    },
+    setOutroDuration(state, action: PayloadAction<number>) {
+      state.outroDuration = action.payload;
+    },
   },
 });
 
-export const { setIntro, setOutro } = introOutroSlice.actions;
+export const { setIntro, setOutro, setIntroDuration, setOutroDuration } =
+  introOutroSlice.actions;
 export default introOutroSlice.reducer;

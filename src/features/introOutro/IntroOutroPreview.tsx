@@ -6,35 +6,50 @@ const IntroOutroPreview = () => {
     (state: RootState) => state.introOutro
   );
 
-  const isVideo = (file: File | null) => {
-    return file?.type.startsWith("video");
-  };
-
-  const isImage = (file: File | null) => {
-    return file?.type.startsWith("image");
-  };
+  const isVideo = (file: File | null) => file?.type.startsWith("video");
+  const isImage = (file: File | null) => file?.type.startsWith("image");
 
   return (
-    <div className="flex justify-center gap-8 mt-4">
+    <div className="flex justify-center gap-8 mt-8 flex-wrap">
       {/* Intro */}
       {intro && introUrl && (
-        <div>
-          {isVideo(intro) ? (
-            <video src={introUrl} controls className="w-64 rounded shadow" />
-          ) : isImage(intro) ? (
-            <img src={introUrl} alt="Intro" className="w-64 rounded shadow" />
-          ) : null}
+        <div className="flex flex-col items-center">
+          <div className="w-64 h-40 bg-black rounded overflow-hidden shadow">
+            {isVideo(intro) ? (
+              <video
+                src={introUrl}
+                controls
+                className="w-full h-full object-cover"
+              />
+            ) : isImage(intro) ? (
+              <img
+                src={introUrl}
+                alt="Intro"
+                className="w-full h-full object-contain"
+              />
+            ) : null}
+          </div>
         </div>
       )}
 
       {/* Outro */}
       {outro && outroUrl && (
-        <div>
-          {isVideo(outro) ? (
-            <video src={outroUrl} controls className="w-64 rounded shadow" />
-          ) : isImage(outro) ? (
-            <img src={outroUrl} alt="Outro" className="w-64 rounded shadow" />
-          ) : null}
+        <div className="flex flex-col items-center">
+          <div className="w-64 h-40 bg-black rounded overflow-hidden shadow">
+            {isVideo(outro) ? (
+              <video
+                src={outroUrl}
+                controls
+                className="w-full h-full object-cover"
+              />
+            ) : isImage(outro) ? (
+              <img
+                src={outroUrl}
+                alt="Outro"
+                className="w-full h-full object-contain"
+              />
+            ) : null}
+          </div>
         </div>
       )}
     </div>
